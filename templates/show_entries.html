@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% block body %}
+    {% if session.logged_in %}
+        <form action="{{ url_for('add_entry') }}" method=post class=add-entry>
+            <dl>
+                <dt>Title:</dt>
+                <dd><input type="text" size=30 name="title"/></dd>
+                <dt>Text:</dt>
+                <dd><textarea name="text"cols=5 rows="40"></textarea></dd>
+                <dd><input type="submit" value="Share"/></dd>
+            </dl>
+        </form>
+    {% endif %}
+<ul id="entries">
+{% for entry in entries %}
+    <li><h2>{{ entry.title }}</h2>{{ entry.text|safe }}</li>
+{% else %}
+    <li><em>Unbelievable. No entries here so far</em></li>
+{% endfor %}
+</ul>
+<canvas id="myChart" width="400" height="400"></canvas>
+<script>
+    //Get the context of the canvas element we want to select
+    var ctx = document.getElementById("myChart").getContext("2d");
+    var data = {
+        labels : ["January","February","March","April","May","June","July"],
+        datasets : [
+            {
+                fillColor : "rgba(220,220,220,0.5)",
+                strokeColor : "rgba(220,220,220,1)",
+                pointColor : "rgba(220,220,220,1)",
+                pointStrokeColor : "#fff",
+                data : {{ data }}
+
+            },
+            {
+                fillColor : "rgba(151,187,205,0.5)",
+                strokeColor : "rgba(151,187,205,1)",
+                pointColor : "rgba(151,187,205,1)",
+                pointStrokeColor : "#fff",
+                data : [28,48,40,19,96,27,100]
+            }
+        ]
+    };
+    new Chart(ctx).Line(data);
+
+
+</script>
+{% endblock %}

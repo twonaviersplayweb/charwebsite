@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+	<meta charset="UTF-8">
+	<title>Angular</title>
+	<link rel="stylesheet" type="text/css" href="/static/bootstrap.min.css">
+	<script type="text/javascript" src="/static/angular.min.js"></script>
+	<script type="text/javascript" src="/static/main.js"></script>
+</head>
+<body ng-controller="my_ctrl">
+	<input type="text" ng-model="hello">
+	<h1>{{ hello }}</h1>		
+	<button class="btn btn-primary" ng-click="loadData()">Load Data</button>
+	<div ng-repeat="item in products">
+		<span>{{ '{{item.name}}' }}</span>
+	</div>
+</body>
+</html>
